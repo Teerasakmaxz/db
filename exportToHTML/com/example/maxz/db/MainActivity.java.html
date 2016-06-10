@@ -1,0 +1,226 @@
+<html>
+<head>
+<title>MainActivity.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.ln { color: rgb(0,0,0); font-weight: normal; font-style: normal; }
+.s0 { color: rgb(204,120,50); }
+.s1 { color: rgb(169,183,198); }
+.s2 { color: rgb(106,135,89); }
+.s3 { color: rgb(104,151,187); }
+.s4 { color: rgb(128,128,128); }
+</style>
+</head>
+<BODY BGCOLOR="#2b2b2b">
+<TABLE CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#C0C0C0" >
+<TR><TD><CENTER>
+<FONT FACE="Arial, Helvetica" COLOR="#000000">
+MainActivity.java</FONT>
+</center></TD></TR></TABLE>
+<pre>
+<span class="s0">package </span><span class="s1">com.example.maxz.db</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">import </span><span class="s1">java.io.BufferedReader</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.io.IOException</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.io.InputStream</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.io.InputStreamReader</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.ArrayList</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">java.util.List</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">org.apache.http.HttpEntity</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.HttpResponse</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.NameValuePair</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.StatusLine</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.client.ClientProtocolException</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.client.HttpClient</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.client.entity.UrlEncodedFormEntity</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.client.methods.HttpPost</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.impl.client.DefaultHttpClient</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">org.apache.http.message.BasicNameValuePair</span><span class="s0">;</span><span class="s1"> 
+ 
+</span><span class="s0">import </span><span class="s1">android.os.Bundle</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.os.StrictMode</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.annotation.SuppressLint</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.app.Activity</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.util.Log</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.view.View</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.Button</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.ImageView</span><span class="s0">;</span><span class="s1"> 
+</span><span class="s0">import </span><span class="s1">android.widget.TextView</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+</span><span class="s0">public class </span><span class="s1">MainActivity </span><span class="s0">extends </span><span class="s1">Activity { 
+    @SuppressLint(</span><span class="s2">&quot;NewApi&quot;</span><span class="s1">) 
+    </span><span class="s0">int </span><span class="s1">ans = </span><span class="s3">0</span><span class="s0">, </span><span class="s1">et = </span><span class="s3">0</span><span class="s0">;</span><span class="s1"> 
+    ImageView gg</span><span class="s0">;</span><span class="s1"> 
+    @Override 
+ 
+    </span><span class="s0">public void </span><span class="s1">onCreate(Bundle savedInstanceState) { 
+        </span><span class="s0">super</span><span class="s1">.onCreate(savedInstanceState)</span><span class="s0">;</span><span class="s1"> 
+        setContentView(R.layout.activity_main)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">if </span><span class="s1">(android.os.Build.VERSION.SDK_INT &gt; </span><span class="s3">9</span><span class="s1">) { 
+            StrictMode.ThreadPolicy policy = </span><span class="s0">new </span><span class="s1">StrictMode.ThreadPolicy.Builder().permitAll().build()</span><span class="s0">;</span><span class="s1"> 
+            StrictMode.setThreadPolicy(policy)</span><span class="s0">;</span><span class="s1"> 
+        } 
+ 
+     </span><span class="s0">final   </span><span class="s1">Button btn1=(Button)findViewById(R.id.btn1)</span><span class="s0">;</span><span class="s1"> 
+       </span><span class="s0">final </span><span class="s1">Button btn2=(Button)findViewById(R.id.btn2)</span><span class="s0">;</span><span class="s1"> 
+      </span><span class="s0">final </span><span class="s1">TextView tex=(TextView)findViewById(R.id.tex)</span><span class="s0">;</span><span class="s1"> 
+         gg=(ImageView)findViewById(R.id.img)</span><span class="s0">;</span><span class="s1"> 
+        btn1.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+ 
+                et = </span><span class="s3">1</span><span class="s0">;</span><span class="s1"> 
+                String ree = String.valueOf(et)</span><span class="s0">;</span><span class="s1"> 
+ 
+ 
+                ans = ans + </span><span class="s3">1</span><span class="s0">;</span><span class="s1"> 
+               ch(ans)</span><span class="s0">;</span><span class="s1"> 
+                String str = String.valueOf(ans)</span><span class="s0">;</span><span class="s1"> 
+                String url = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/ques.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                String rt = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/ans_one.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                String tt = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/ans_two.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                String ff = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/in.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                List&lt;NameValuePair&gt; params = </span><span class="s0">new </span><span class="s1">ArrayList&lt;NameValuePair&gt;()</span><span class="s0">;</span><span class="s1"> 
+                params.add(</span><span class="s0">new </span><span class="s1">BasicNameValuePair(</span><span class="s2">&quot;tex1&quot;</span><span class="s0">, </span><span class="s1">str.toString()))</span><span class="s0">;</span><span class="s1"> 
+                params.add(</span><span class="s0">new </span><span class="s1">BasicNameValuePair(</span><span class="s2">&quot;ans&quot;</span><span class="s0">, </span><span class="s1">ree.toString()))</span><span class="s0">;</span><span class="s1"> 
+                String resultServer = getHttpPost(url</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                getHttpPost(ff</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                String x = getHttpPost(rt</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                String y = getHttpPost(tt</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                btn1.setText(y)</span><span class="s0">;</span><span class="s1"> 
+                btn2.setText(x)</span><span class="s0">;</span><span class="s1"> 
+                tex.setText(resultServer)</span><span class="s0">;</span><span class="s1"> 
+ 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+        btn2.setOnClickListener(</span><span class="s0">new </span><span class="s1">View.OnClickListener() { 
+            @Override 
+            </span><span class="s0">public void </span><span class="s1">onClick(View v) { 
+                et = </span><span class="s3">2</span><span class="s0">;</span><span class="s1"> 
+                String ree = String.valueOf(et)</span><span class="s0">;</span><span class="s1"> 
+ 
+                ans = ans + </span><span class="s3">1</span><span class="s0">;</span><span class="s1"> 
+                ch(ans)</span><span class="s0">;</span><span class="s1"> 
+                String str = String.valueOf(ans)</span><span class="s0">;</span><span class="s1"> 
+                String url = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/ques.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                String rt = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/ans_one.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                String tt = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/ans_two.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                String ff = </span><span class="s2">&quot;http://www.appdd.jiumjee.com/in.php&quot;</span><span class="s0">;</span><span class="s1"> 
+                List&lt;NameValuePair&gt; params = </span><span class="s0">new </span><span class="s1">ArrayList&lt;NameValuePair&gt;()</span><span class="s0">;</span><span class="s1"> 
+                params.add(</span><span class="s0">new </span><span class="s1">BasicNameValuePair(</span><span class="s2">&quot;tex1&quot;</span><span class="s0">, </span><span class="s1">str.toString()))</span><span class="s0">;</span><span class="s1"> 
+                params.add(</span><span class="s0">new </span><span class="s1">BasicNameValuePair(</span><span class="s2">&quot;ans&quot;</span><span class="s0">, </span><span class="s1">ree.toString()))</span><span class="s0">;</span><span class="s1"> 
+                String resultServer = getHttpPost(url</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                String x = getHttpPost(rt</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                String y = getHttpPost(tt</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                getHttpPost(ff</span><span class="s0">, </span><span class="s1">params)</span><span class="s0">;</span><span class="s1"> 
+                btn1.setText(y)</span><span class="s0">;</span><span class="s1"> 
+                btn2.setText(x)</span><span class="s0">;</span><span class="s1"> 
+                tex.setText(resultServer)</span><span class="s0">;</span><span class="s1"> 
+            } 
+        })</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+ 
+    </span><span class="s0">public </span><span class="s1">String getHttpPost(String url</span><span class="s0">, </span><span class="s1">List&lt;NameValuePair&gt; params) { 
+        StringBuilder str = </span><span class="s0">new </span><span class="s1">StringBuilder()</span><span class="s0">;</span><span class="s1"> 
+        HttpClient client = </span><span class="s0">new </span><span class="s1">DefaultHttpClient()</span><span class="s0">;</span><span class="s1"> 
+        HttpPost httpPost = </span><span class="s0">new </span><span class="s1">HttpPost(url)</span><span class="s0">;</span><span class="s1"> 
+        </span><span class="s0">try </span><span class="s1">{ 
+            httpPost.setEntity(</span><span class="s0">new </span><span class="s1">UrlEncodedFormEntity(params))</span><span class="s0">;</span><span class="s1"> 
+            HttpResponse response = client.execute(httpPost)</span><span class="s0">;</span><span class="s1"> 
+            StatusLine statusLine = response.getStatusLine()</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">int </span><span class="s1">statusCode = statusLine.getStatusCode()</span><span class="s0">;</span><span class="s1"> 
+            </span><span class="s0">if </span><span class="s1">(statusCode == </span><span class="s3">200</span><span class="s1">) { </span><span class="s4">// Status OK</span><span class="s1"> 
+                HttpEntity entity = response.getEntity()</span><span class="s0">;</span><span class="s1"> 
+                InputStream content = entity.getContent()</span><span class="s0">;</span><span class="s1"> 
+                BufferedReader reader = </span><span class="s0">new </span><span class="s1">BufferedReader(</span><span class="s0">new </span><span class="s1">InputStreamReader(content))</span><span class="s0">;</span><span class="s1"> 
+                String line</span><span class="s0">;</span><span class="s1"> 
+                </span><span class="s0">while </span><span class="s1">((line = reader.readLine()) != </span><span class="s0">null</span><span class="s1">) { 
+                    str.append(line)</span><span class="s0">;</span><span class="s1"> 
+                } 
+            } </span><span class="s0">else </span><span class="s1">{ 
+                Log.e(</span><span class="s2">&quot;Log&quot;</span><span class="s0">, </span><span class="s2">&quot;Failed to download result..&quot;</span><span class="s1">)</span><span class="s0">;</span><span class="s1"> 
+            } 
+        } </span><span class="s0">catch </span><span class="s1">(ClientProtocolException e) { 
+            e.printStackTrace()</span><span class="s0">;</span><span class="s1"> 
+        } </span><span class="s0">catch </span><span class="s1">(IOException e) { 
+            e.printStackTrace()</span><span class="s0">;</span><span class="s1"> 
+        } 
+        </span><span class="s0">return </span><span class="s1">str.toString()</span><span class="s0">;</span><span class="s1"> 
+    } 
+ 
+    </span><span class="s0">public void </span><span class="s1">ch (</span><span class="s0">int </span><span class="s1">ans){ 
+ 
+        </span><span class="s0">switch </span><span class="s1">(ans){ 
+            </span><span class="s0">case </span><span class="s3">1</span><span class="s1">:gg.setImageResource(R.drawable.a)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">2</span><span class="s1">:gg.setImageResource(R.drawable.b)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">3</span><span class="s1">:gg.setImageResource(R.drawable.c)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">4</span><span class="s1">:gg.setImageResource(R.drawable.d)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">5</span><span class="s1">:gg.setImageResource(R.drawable.e)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">6</span><span class="s1">:gg.setImageResource(R.drawable.f)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">7</span><span class="s1">:gg.setImageResource(R.drawable.g)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">8</span><span class="s1">:gg.setImageResource(R.drawable.h)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">9</span><span class="s1">:gg.setImageResource(R.drawable.i)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">10</span><span class="s1">:gg.setImageResource(R.drawable.j)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">11</span><span class="s1">:gg.setImageResource(R.drawable.k)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">12</span><span class="s1">:gg.setImageResource(R.drawable.l)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">13</span><span class="s1">:gg.setImageResource(R.drawable.m)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">14</span><span class="s1">:gg.setImageResource(R.drawable.n)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">15</span><span class="s1">:gg.setImageResource(R.drawable.o)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">16</span><span class="s1">:gg.setImageResource(R.drawable.p)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">17</span><span class="s1">:gg.setImageResource(R.drawable.q)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">18</span><span class="s1">:gg.setImageResource(R.drawable.r)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">19</span><span class="s1">:gg.setImageResource(R.drawable.s)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">20</span><span class="s1">:gg.setImageResource(R.drawable.t)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">21</span><span class="s1">:gg.setImageResource(R.drawable.u)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">22</span><span class="s1">:gg.setImageResource(R.drawable.v)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">23</span><span class="s1">:gg.setImageResource(R.drawable.w)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">24</span><span class="s1">:gg.setImageResource(R.drawable.x)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">25</span><span class="s1">:gg.setImageResource(R.drawable.y)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">26</span><span class="s1">:gg.setImageResource(R.drawable.z)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">27</span><span class="s1">:gg.setImageResource(R.drawable.aa)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">28</span><span class="s1">:gg.setImageResource(R.drawable.ab)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">29</span><span class="s1">:gg.setImageResource(R.drawable.ac)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">30</span><span class="s1">:gg.setImageResource(R.drawable.ad)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">31</span><span class="s1">:gg.setImageResource(R.drawable.ae)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">32</span><span class="s1">:gg.setImageResource(R.drawable.af)</span><span class="s0">;break;</span><span class="s1"> 
+            </span><span class="s0">case </span><span class="s3">33</span><span class="s1">:gg.setImageResource(R.drawable.ag)</span><span class="s0">;break;</span><span class="s1"> 
+</span><span class="s4">//            case 34:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 35:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 36:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 37:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 38:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 39:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 40:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 41:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 42:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 43:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 44:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 45:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 46:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 47:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 48:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 49:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 50:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 51:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 52:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 53:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 54:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 55:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 56:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 57:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 58:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 59:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+</span><span class="s4">//            case 60:gg.setImageResource(R.drawable.a);break;</span><span class="s1"> 
+ 
+ 
+ 
+        } 
+    } 
+} 
+ 
+</span></pre>
+</body>
+</html>
